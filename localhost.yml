@@ -1,0 +1,11 @@
+---
+- name: Install bearded-avenger
+  hosts: localhost
+  become: True
+  vars:
+    sshd_port: 2222
+
+  roles:
+    - { role: ssh-logger, tags: role-ssh-logger }
+
+  tasks:

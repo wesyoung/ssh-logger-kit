@@ -1,0 +1,9 @@
+---
+# handlers file for ssh-logger
+- name: Restart sshd
+  service:
+    name: sshd
+    state: restarted
+
+- name: restart docker-ssh-logger
+  command: docker run -d --restart=always -p 22:2222 justinazoff/ssh-auth-logger:latest ssh-auth-logger
