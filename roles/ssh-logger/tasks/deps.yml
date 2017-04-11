@@ -22,3 +22,6 @@
     - linux-image-extra-virtual
     - docker-engine
     - htop
+    - python-virtualenv
+    - virtualenvwrapper
+    - libssl-dev

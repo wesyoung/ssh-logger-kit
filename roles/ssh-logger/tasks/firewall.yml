@@ -3,7 +3,7 @@
 
 - ufw: rule=allow port={{ item }} state=enabled
   with_items:
-    - "{{ sshd_port }}"
+    - "{{ ssh_traffic_port }}"
   tags: ufw
 
 - ufw: rule=allow port=22 state=enabled

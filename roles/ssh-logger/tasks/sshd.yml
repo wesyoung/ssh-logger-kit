@@ -9,5 +9,5 @@
     dest: "/etc/ssh/sshd_config"
     regexp: "^Port"
     line: "Port {{ sshd_port }}"
-  #notify: "Restart sshd"
+  notify: "Restart sshd"
   when: v.stat.exists == false

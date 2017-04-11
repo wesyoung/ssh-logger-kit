@@ -1,4 +1,6 @@
 ---
 # defaults file for ssh-logger
 
-sshd_port: 2222
+ssh_traffic_port: 22  # port docker routes traffic from to it's logger
+sshd_alt_port: 1100     # alternative sshd port
+docker_container_name: 'ssh_logger_kit'

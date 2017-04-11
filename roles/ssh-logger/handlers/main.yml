@@ -6,4 +6,4 @@
     state: restarted
 
 - name: restart docker-ssh-logger
-  command: docker run -d --restart=always -p 22:2222 justinazoff/ssh-auth-logger:latest ssh-auth-logger
+  command: docker run -d --restart=always --name "{{ docker_container_name }}" -p "{{ ssh_traffic_port }}":22 justinazoff/ssh-auth-logger:latest ssh-auth-logger

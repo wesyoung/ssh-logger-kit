@@ -6,9 +6,6 @@ VAGRANTFILE_API_VERSION = "2"
 VAGRANTFILE_LOCAL = 'Vagrantfile.local'
 
 $script = <<SCRIPT
-#echo "ubuntu:ubuntu" | sudo chpasswd
-sudo apt-get update && sudo apt-get install -y python2.7 python-pip python-dev git libffi-dev libssl-dev
-sudo pip install 'setuptools>=18.5' 'ansible>=2.1'
 cd /vagrant
 bash bootstrap.sh
 SCRIPT
@@ -19,8 +16,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
   config.vm.box = 'ubuntu/xenial64'
 
+  config.vm.network :forwarded_port, guest: 2223, host: 2223
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--cpus", "2", "--ioapic", "on", "--memory", "1024" ]
+    vb.customize ["modifyvm", :id, "--cpus", "2", "--ioapic", "on", "--memory", "512" ]
   end
 
   config.vm.network 'public_network'
