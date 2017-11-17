@@ -1,0 +1,42 @@
+---
+- name: Installing...
+  hosts: all
+  become: True
+
+  tasks:
+    - name: Add apt HTTPS support
+      apt: name={{ item }} state=present
+      with_items:
+        - apt-transport-https
+        - ca-certificates
+
+    - name: hold specific packages
+      command: apt-mark hold "{{ item }}"
+      with_items:
+        - linux-headers
+
+    - name: Update apt cache if needed.
+      apt: update_cache=yes upgrade=yes
+
+    - name: install deps
+      apt:
+        state: latest
+        pkg: "{{ item }}"
+      with_items:
+        - htop
+        - python-virtualenv
+        - virtualenvwrapper
+        - libssl-dev
+        - unattended-upgrades
+        - openntpd
+        - rng-tools
+        # monit?
+
+      - name: Adjust APT update intervals
+        copy: src=apt_periodic dest=/etc/apt/apt.conf.d/10periodic
+
+      - name: install csirtg-smrt
+        pip: name=csirtg_smrt
+
+  roles:
+    - { role: csirtgadgets.sshlogger }
