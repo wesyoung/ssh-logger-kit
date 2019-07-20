@@ -1,8 +1,0 @@
----
-- name: pull recent docker image
-  command: docker pull justinazoff/ssh-auth-logger:latest
-  async: 300
-  poll: 5
-  notify: 'restart docker-ssh-logger'
-
-- user: name="{{ ansible_env.SUDO_USER }}" groups=docker append=yes
